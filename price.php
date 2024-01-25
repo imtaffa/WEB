@@ -111,7 +111,6 @@ $(document).ready(function(){
 });
 </script>
 </body>
-
+<br></br>
 <?php include('footer.php')?>
-
 </html>
