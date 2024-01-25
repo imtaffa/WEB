@@ -64,27 +64,52 @@
             </div>
         </div>
         <div class="how-itworks">
-          <div class="container">
-            <?php include 'config.php'; ?>
-              <h1>Our Newsteller Member</h1>
-              <table class="container" >
-                <thead>
-                    <tr>
-                        <th scope="col ">Nama</th>
-                        <th scope="col ">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($all_pelanggan as $item) { ?>
-                    <tr>
-                        <td><?= htmlspecialchars($item['name']) ?></td>
-                        <td><?= htmlspecialchars($item['email']) ?></td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+    <div class="container">
+        <?php include 'config.php'; ?>
+        <h1 class="header">Our Newsteller Member</h1>
+        <table class="container" id="pelanggan-table">
+            <thead>
+                <tr>
+                    <th scope="col ">Nama</th>
+                    <th scope="col ">Email</th>
+                    <th scope="col ">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($all_pelanggan as $item) { ?>
+                <tr>
+                    <td><?= htmlspecialchars($item['name']) ?></td>
+                    <td><?= htmlspecialchars($item['email']) ?></td>
+                    <td><button class="btn btn-danger delete-btn" data-email="<?= htmlspecialchars($item['email']) ?>">Delete</button></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".delete-btn").click(function(){
+        var email = $(this).data("email");
+
+        if(confirm("Apakah anda yakin ingin menghapus data ini?")) {
+            $.ajax({
+                url: "delete.php",
+                type: "POST",
+                data: {email: email},
+                success: function(response){
+                    if(response == "success") {
+                        location.reload();
+                    } else {
+                        alert("Gagal menghapus data");
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
 </body>
 
 <?php include('footer.php')?>

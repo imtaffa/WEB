@@ -16,6 +16,18 @@ function addpelanggan( $data )
     endif;
 }
 
+function deletepelanggan( $email )
+{
+    global $con;
+    mysqli_query($con, "DELETE FROM pelanggan WHERE email = '$email'");
+
+    if(mysqli_affected_rows($con) > 0) :
+        return true;
+    else:
+        return false;
+    endif;
+}
+
 function getallpelanggan()
 {
     global $con;
@@ -47,7 +59,19 @@ class PelangganData {
 
         return $pelanggan_data;
     }
+
+    public function deletepelanggan( $email ) {
+        global $con;
+        mysqli_query($con, "DELETE FROM pelanggan WHERE email = '$email'");
+
+        if(mysqli_affected_rows($con) > 0) :
+            return true;
+        else:
+            return false;
+        endif;
+    }
 }
 
 $pelanggan_data = new PelangganData($con);
 $all_pelanggan = $pelanggan_data->getallpelanggan();
+?>
