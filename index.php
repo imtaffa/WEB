@@ -125,8 +125,9 @@
               }
             }
           }
-      ?>
+        ?>
      </div>
+     <br><a href="price.php"> Cek followers newsteller kita disini</a><br>
     </div>  
      <div>
         <?php include ('footer.php');?>

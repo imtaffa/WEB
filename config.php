@@ -1,4 +1,5 @@
 <?php
+$con = mysqli_connect("localhost:3307", "root", "", "pelanggan");
 
 function addpelanggan( $data )
 {
@@ -15,4 +16,38 @@ function addpelanggan( $data )
     endif;
 }
 
-?>
+function getallpelanggan()
+{
+    global $con;
+
+    $result = mysqli_query($con, "SELECT * FROM pelanggan");
+    $pelanggan_data = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $pelanggan_data[] = $row;
+    }
+
+    return $pelanggan_data;
+}
+
+class PelangganData {
+    private $con;
+
+    public function __construct($con) {
+        $this->con = $con;
+    }
+
+    public function getallpelanggan() {
+        $result = mysqli_query($this->con, "SELECT * FROM pelanggan");
+        $pelanggan_data = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $pelanggan_data[] = $row;
+        }
+
+        return $pelanggan_data;
+    }
+}
+
+$pelanggan_data = new PelangganData($con);
+$all_pelanggan = $pelanggan_data->getallpelanggan();

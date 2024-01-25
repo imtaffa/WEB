@@ -63,6 +63,28 @@
               </div>
             </div>
         </div>
+        <div class="how-itworks">
+          <div class="container">
+            <?php include 'config.php'; ?>
+              <h1>Our Newsteller Member</h1>
+              <table class="container" >
+                <thead>
+                    <tr>
+                        <th scope="col ">Nama</th>
+                        <th scope="col ">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($all_pelanggan as $item) { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($item['name']) ?></td>
+                        <td><?= htmlspecialchars($item['email']) ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+    </div>
+</div>
 </body>
 
 <?php include('footer.php')?>
